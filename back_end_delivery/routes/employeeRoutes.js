@@ -5,23 +5,19 @@ const { getlimitEmployees,
         updateEmployee, 
         deleteEmployee 
     } = require('../controllers/employeeController');
-//const checkAccess = require('../middleware/accessControl');
+
+const checkAccess = require('../middleware/accessControl');
 
 const router = express.Router();
-//router.use(checkAccess(['view', 'create', 'update', 'delete']));
-// Get all employees
-router.get('/',  getlimitEmployees);
 
-// Get an employee by ID
-router.get('/:id',getEmployeeById);
+router.get('/', checkAccess('view'),  getlimitEmployees);
 
-// Create a new employee
-router.post('/',  createEmployee);
+router.get('/:id',checkAccess('view'),getEmployeeById);
 
-// Update an employee
-router.put('/:id', updateEmployee);
+router.post('/',checkAccess('create'),  createEmployee);
 
-// Delete an employee
-router.delete('/:id',  deleteEmployee);
+router.put('/:id', checkAccess('update'), updateEmployee);
+
+router.delete('/:id',checkAccess('create'),  deleteEmployee);
 
 module.exports = router;

@@ -1,37 +1,52 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const sequelize = require('./config/database');
-const PORT = process.env.PORT || 3000;
 const cors = require('cors');
-const app = express();
-
 require('dotenv').config();
 
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware
 app.use(express.json());
 app.use(cors());
-app.use('/api/employee', require('./routes/employeeRoutes'));
-app.use('/api/drivers', require('./routes/driverRoutes'));
-app.use('/api/delivery', require('./routes/deliveryRoutes')); 
-app.use('/api/order', require('./routes/orderRoutes'));
-app.use('/api/partner', require('./routes/partnerRoutes'));
-app.use('/api/payment', require('./routes/paymentRoutes'));
-app.use('/api/product', require('./routes/productRoutes'));
-app.use('/api/storage', require('./routes/storageRoutes'));
+app.use(bodyParser.json());
 
+// Route Imports
+const employeeRoutes = require('./routes/employeeRoutes');
+const driverRoutes = require('./routes/driverRoutes');
+const deliveryRoutes = require('./routes/deliveryRoutes');
+const orderRoutes = require('./routes/orderRoutes');
+const partnerRoutes = require('./routes/partnerRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
+const productRoutes = require('./routes/productRoutes');
+const storageRoutes = require('./routes/storageRoutes');
+
+// Routes
+app.use('/api/employee', employeeRoutes);
+app.use('/api/drivers', driverRoutes);
+app.use('/api/delivery', deliveryRoutes);
+app.use('/api/order', orderRoutes);
+app.use('/api/partner', partnerRoutes);
+app.use('/api/payment', paymentRoutes);
+app.use('/api/product', productRoutes);
+app.use('/api/storage', storageRoutes);
+
+// Database Connection and Sync
 sequelize.authenticate()
-  .then(() => console.log('Database connected successfully'))
+  .then(() => {
+    console.log('Database connected successfully');
+    return sequelize.sync(); // Synchronizing database
+  })
+  .then(() => {
+    console.log('Database synchronized successfully.');
+  })
   .catch((error) => {
-    console.error('Database connection failed:', error.message);
+    console.error('Database connection or synchronization failed:', error.message);
+    process.exit(1); // Exit the process if the database fails to connect
   });
 
-(async () => {
-    try {
-      await sequelize.sync(); 
-      console.log('Database synchronized successfully.');
-    } catch (error) {
-      console.error('Failed to sync database:', error.message);
-    }
-  })();
-
-  app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-  });
+// Start the Server
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
+});
