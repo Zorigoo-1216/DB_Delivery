@@ -9,13 +9,13 @@ const {
 
 const router = express.Router();
 
-router.get('/', getLimitPayments);
+router.get('/',checkAccess('view'), getLimitPayments);
 
-router.get('/:id', getPaymentById);
-router.post('/', createPayment);
+router.get('/:id',checkAccess('view'), getPaymentById);
+router.post('/',checkAccess('create'), createPayment);
 
-router.put('/:id', updatePayment);
+router.put('/:id',checkAccess('update'), updatePayment);
 
-router.delete('/:id', deletePayment);
+router.delete('/:id',checkAccess('delete'), deletePayment);
 
 module.exports = router;

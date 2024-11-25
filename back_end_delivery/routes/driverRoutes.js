@@ -8,14 +8,14 @@ const {
 } = require('../controllers/driverController');
 const router = express.Router();
 
-router.get('/', getLimitDrivers);
+router.get('/',checkAccess('view'), getLimitDrivers);
 
-router.get('/:id', getDriverById);
+router.get('/:id',checkAccess('view'), getDriverById);
 
-router.post('/', createDriver);
+router.post('/',checkAccess('create'), createDriver);
 
-router.put('/:id', updateDriver);
+router.put('/:id',checkAccess('update'), updateDriver);
 
-router.delete('/:id', deleteDriver);
+router.delete('/:id',checkAccess('delete'), deleteDriver);
 
 module.exports = router;

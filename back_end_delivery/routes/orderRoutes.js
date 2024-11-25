@@ -9,14 +9,14 @@ const {
 
 const router = express.Router();
 
-router.get('/', getLimitOrders);
+router.get('/',checkAccess('view'), getLimitOrders);
 
-router.get('/:id', getOrderById);
+router.get('/:id',checkAccess('view'), getOrderById);
 
-router.post('/', createOrder);
+router.post('/',checkAccess('create'), createOrder);
 
-router.put('/:id', updateOrder);
+router.put('/:id',checkAccess('update'), updateOrder);
 
-router.delete('/:id', deleteOrder);
+router.delete('/:id',checkAccess('delete'), deleteOrder);
 
 module.exports = router;

@@ -8,14 +8,14 @@ const {
 } = require('../controllers/deliveryController');
 const router = express.Router();
 
-router.get('/', getLimitDeliveries);
+router.get('/',checkAccess('view'), getLimitDeliveries);
 
-router.get('/:id', getDeliveryById);
+router.get('/:id',checkAccess('view'), getDeliveryById);
 
-router.post('/', createDelivery);
+router.post('/',checkAccess('create'), createDelivery);
 
-router.put('/:id', updateDelivery);
+router.put('/:id',checkAccess('update'), updateDelivery);
 
-router.delete('/:id', deleteDelivery);
+router.delete('/:id',checkAccess('delete'), deleteDelivery);
 
 module.exports = router;

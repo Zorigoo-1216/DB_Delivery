@@ -8,14 +8,14 @@ const {
 } = require('../controllers/partnerController');
 
 const router = express.Router();
-router.get('/', getLimitPartners);
+router.get('/',checkAccess('view'), getLimitPartners);
 
-router.get('/:id', getPartnerById);
+router.get('/:id',checkAccess('view'), getPartnerById);
 
-router.post('/', createPartner);
+router.post('/',checkAccess('create'), createPartner);
 
-router.put('/:id', updatePartner);
+router.put('/:id',checkAccess('update'), updatePartner);
 
-router.delete('/:id', deletePartner);
+router.delete('/:id',checkAccess('delete'), deletePartner);
 
 module.exports = router;
