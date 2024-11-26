@@ -8,7 +8,7 @@ const {
 } = require('../controllers/orderController');
 
 const router = express.Router();
-
+const checkAccess = require('../middleware/accessControl');
 router.get('/',checkAccess('view'), getLimitOrders);
 
 router.get('/:id',checkAccess('view'), getOrderById);

@@ -8,6 +8,7 @@ const {
 } = require('../controllers/productController');
 
 const router = express.Router();
+const checkAccess = require('../middleware/accessControl');
 
 router.get('/',checkAccess('view'), getLimitProducts);
 

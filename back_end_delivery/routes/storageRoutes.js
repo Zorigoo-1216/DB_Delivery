@@ -8,16 +8,16 @@ const {
 } = require('../controllers/storageController');
 
 const router = express.Router();
+const checkAccess = require('../middleware/accessControl');
+router.get('/',checkAccess('view'), getLimitStorages);
 
-router.get('/', getLimitStorages);
+router.get('/:id',checkAccess('view'), getStorageById);
 
-router.get('/:id', getStorageById);
+router.post('/',checkAccess('create'), createStorage);
 
-router.post('/', createStorage);
+router.put('/:id',checkAccess('update'), updateStorage);
 
-router.put('/:id', updateStorage);
-
-router.delete('/:id', deleteStorage);
+router.delete('/:id',checkAccess('delete'), deleteStorage);
 
 module.exports = router;
 

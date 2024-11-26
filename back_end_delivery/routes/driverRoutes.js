@@ -7,6 +7,7 @@ const {
     deleteDriver
 } = require('../controllers/driverController');
 const router = express.Router();
+const checkAccess = require('../middleware/accessControl');
 
 router.get('/',checkAccess('view'), getLimitDrivers);
 

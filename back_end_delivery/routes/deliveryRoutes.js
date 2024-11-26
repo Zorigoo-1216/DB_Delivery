@@ -6,6 +6,7 @@ const {
     updateDelivery,
     deleteDelivery
 } = require('../controllers/deliveryController');
+const checkAccess = require('../middleware/accessControl');
 const router = express.Router();
 
 router.get('/',checkAccess('view'), getLimitDeliveries);

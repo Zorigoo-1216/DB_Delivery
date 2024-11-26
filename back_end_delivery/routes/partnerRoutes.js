@@ -8,6 +8,7 @@ const {
 } = require('../controllers/partnerController');
 
 const router = express.Router();
+const checkAccess = require('../middleware/accessControl');
 router.get('/',checkAccess('view'), getLimitPartners);
 
 router.get('/:id',checkAccess('view'), getPartnerById);
