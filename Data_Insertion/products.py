@@ -3,7 +3,7 @@ import generators
 import random
 
 mydb = mysql.connector.connect(
-    host="localhost", user="root", password="Zorigt@#1216", database="delivery", port=8080
+    host="localhost", user="root", password="Zorigt@#1216", database="testdelivery", port=8080
 )
 
 mycursor = mydb.cursor()
@@ -21,7 +21,7 @@ for i in range(1000):
     mycursor.execute(
         insert_product_query,
         (
-            random.randint(0, 100),
+            random.randint(20000000, 300000000),
             random.choice(storage_id)[0],
             random.choice(partner_id)[0],
             generators.product_name_generator(),

@@ -2,7 +2,7 @@ const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
 const sequelize = new Sequelize(
-    'delivery', 'root', 'Zorigt@#1216', {
+    'testdelivery', 'root', 'Zorigt@#1216', {
       host: 'localhost',
       port : 8080,
       dialect: 'mysql', 

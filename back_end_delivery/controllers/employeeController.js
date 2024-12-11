@@ -1,6 +1,4 @@
 const Employee = require('../models/employee');
-
-
 async function getlimitEmployees(req, res) {
     try {
         const limitEmployees = await Employee.findAll({

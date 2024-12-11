@@ -21,8 +21,10 @@ const partnerRoutes = require('./routes/partnerRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const productRoutes = require('./routes/productRoutes');
 const storageRoutes = require('./routes/storageRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 // Routes
+app.use('/api/user', userRoutes);
 app.use('/api/employee', employeeRoutes);
 app.use('/api/drivers', driverRoutes);
 app.use('/api/delivery', deliveryRoutes);

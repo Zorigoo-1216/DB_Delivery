@@ -3,7 +3,7 @@ import generators
 
 
 mydb = mysql.connector.connect(
-    host="localhost", user="root", password="Zorigt@#1216", database="delivery", port=8080
+    host="localhost", user="root", password="Zorigt@#1216", database="testdelivery", port=8080
 )
 
 mycursor = mydb.cursor()

@@ -7,7 +7,7 @@ const Product = require('./product');
 const Order = require('./order');
 const Delivery = require('./delivery');
 const Payment = require('./payment');
-
+const User = require('./user');
 
 const defineAssociations = () => {
     Employee.hasOne(Driver, { foreignKey: 'employee_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
@@ -30,6 +30,7 @@ const defineAssociations = () => {
 
     Order.hasOne(Payment, { foreignKey: 'order_id', onDelete: 'NO ACTION', onUpdate: 'CASCADE' });
     Payment.belongsTo(Order, { foreignKey: 'order_id' });
+
 }
 
 
@@ -54,4 +55,5 @@ module.exports = {
     Order,
     Delivery,
     Payment,
+    User
    }; 

@@ -18,6 +18,6 @@ router.post('/',checkAccess('create'),  createEmployee);
 
 router.put('/:id', checkAccess('update'), updateEmployee);
 
-router.delete('/:id',checkAccess('create'),  deleteEmployee);
+router.delete('/:id',checkAccess('delete'),  deleteEmployee);
 
 module.exports = router;
